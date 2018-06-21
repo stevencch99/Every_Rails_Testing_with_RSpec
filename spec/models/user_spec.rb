@@ -47,5 +47,12 @@ RSpec.describe User, type: :model do
   end
 
   it "returns a user's full name as a string" do
-  end
+    user = User.create(
+      first_name: "John",
+      last_name:  "Doe",
+      email:      "johndoe@example.com"
+      )
+
+    expect(user.name).to eq "John Doe"
+    end
 end

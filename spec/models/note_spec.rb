@@ -1,69 +1,69 @@
 require 'rails_helper'
 RSpec.describe Note, type: :model do
   before do
-  end
-  let(:user) { User.create!(
-                 first_name: "Joe",
-                 last_name: "Tester",
-                 email: "joetester2@example.com",
-                 password: "dottle-nouveau-pavilion-tights-furze",
-               )
-               }
-  # 將測試搜尋功能的程式碼整理在一起
-  describe "search message for a term" do
-    context "when a match is found" do
-    end
+    @user = User.create(
+      first_name: "Joe1",
+      last_name:  "Tester",
+      email:      "joetester11@example.com",
+      password:   "dottle-nouveau-pavilion-tights-furze",
+      )
 
-    context "when not match is found" do
-    end
-    it "returns notes that match search term" do
-
-      project = user.projects.create(
+    @project = @user.projects.create(
         name: "Test Project",
       )
+  end
+  # # 和 before block 類似的整理方法
+  # let(:user) { User.create!(
+  #                first_name: "Joe",
+  #                last_name: "Tester",
+  #                email: "joetester2@example.com",
+  #                password: "dottle-nouveau-pavilion-tights-furze",
+  #              )
+  #              }
 
-      note1 = project.notes.create(
+  it "is valid with a user, project, and message" do
+    note = Note.new(
+        message: "This is a sample note",
+        user: @user,
+        project: @project,
+      )
+    expect(note).to be_valid
+  end
+
+  it "is invalid without a message" do
+    note = Note.new(message: nil)
+    note.valid?
+    expect(note.errors[:message]).to include("can't be blank")
+  end
+
+  # 將測試搜尋功能的程式碼整理在一起
+  describe "search message for a term" do
+    before do
+      @note1 = @project.notes.create(
         message: "This is the first note.",
-        user: user,
+        user: @user,
       )
-      note2 = project.notes.create(
+      @note2 = @project.notes.create(
         message: "This is the second note.",
-        user: user,
+        user: @user,
       )
 
-      note3 = project.notes.create(
+      @note3 = @project.notes.create(
         message: "First, preheat the oven.",
-        user: user,
+        user: @user,
       )
-
-      expect(Note.search("first")).to include(note1, note3)
-      expect(Note.search("first")).to_not include(note2)
+    end
+    context "when a match is found" do
+      it "returns notes that match search term" do
+        expect(Note.search("first")).to include(@note1, @note3)
+        expect(Note.search("first")).to_not include(@note2)
+      end
     end
 
-    it "returns an empty collection when no results are found" do
-      user = User.create!(
-        first_name: "Joe1",
-        last_name:  "Tester",
-        email:      "joetester1@example.com",
-        password:   "dottle-nouveau-pavilion-tights-furze",
-      )
-
-      project = user.projects.create(
-        name:  "Test Project",
-      )
-
-      note1 = project.notes.create(
-        message: "This is the first note.",
-      )
-      note2 = project.notes.create(
-        message: "This is the second note.",
-        user: user,
-      )
-      note3 = project.notes.create(
-        message: "First, preheat the oven.",
-        user: user,
-      )
-      expect(Note.search("message")).to be_empty
+    context "when no match is found" do
+      it "returns an empty collection" do
+        expect(Note.search("message")).to be_empty
+      end
     end
   end
 end

@@ -1,11 +1,18 @@
 require 'rails_helper'
 
+  describe User do
+    it "has a valid factory" do
+      expect(FactoryBot.build(:user)).to be_valid
+    end
+  end
+
 RSpec.describe User, type: :model do
+
   it "is valid with a first name, last name, email, and password" do
     user = User.new(
       first_name: "Aaron",
       last_name:  "Sumner",
-      email:      "tester@example.com",
+      email:      "user_test_tester180709@example.com",
       password:   "dottle-nouveau-pavilion-tights-furze",
       )
     expect(user).to be_valid # this test using 'be_valid' matcher in RSpec

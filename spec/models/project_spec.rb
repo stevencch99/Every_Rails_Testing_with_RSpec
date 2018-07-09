@@ -5,7 +5,7 @@ RSpec.describe Project, type: :model do
     user = User.create!(
       first_name: "Joe",
       last_name: "Tester",
-      email: "joetester1@example.com",
+      email: "joetester180709@example.com",
       password: "dottle-nouveau-pavilion-tights-furze",
       )
 
@@ -25,18 +25,18 @@ RSpec.describe Project, type: :model do
     user = User.create!(
       first_name: "Joe",
       last_name:  "Tester",
-      email:      "joetester2@example.com",
+      email:      "project_test_joetester2@example.com",
       password:   "dottle-nouveau-pavilion-tights-furze",
       )
 
-    user.projects.create(
+    user.projects.create!(
       name: "Test Project",
       )
 
-    other_user = User.create(
+    other_user = User.create!(
       first_name: "Jane",
       last_name:  "Tester",
-      email:      "janetester@example.com",
+      email:      "note_test_janetester180709@example.com",
       password:   "dottle-nouveau-pavilion-tights-furze",
       )
 

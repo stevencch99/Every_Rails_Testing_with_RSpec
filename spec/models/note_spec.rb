@@ -1,10 +1,10 @@
 require 'rails_helper'
 RSpec.describe Note, type: :model do
   before do
-    @user = User.create(
+    @user = User.create!(
       first_name: "Joe1",
       last_name:  "Tester",
-      email:      "joetester11@example.com",
+      email:      "note_test@example.com",
       password:   "dottle-nouveau-pavilion-tights-furze",
       )
 

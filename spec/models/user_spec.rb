@@ -41,8 +41,8 @@ RSpec.describe User, type: :model do
     # FactoryBot.create(:user, email: "aaron@example.com")
     # user = FactoryBot.build(:user, email: "aaron@example.com")
 
-    FactoryBot.create(:user)
-    user = FactoryBot.build(:user)
+    FactoryBot.create(:user, email: "s@email.com")
+    user = FactoryBot.build(:user, email: "s@email.com")
 
     # User.create(
     #   first_name: "Joe",

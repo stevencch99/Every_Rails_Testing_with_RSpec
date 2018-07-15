@@ -6,11 +6,11 @@ RSpec.describe Note, type: :model do
       last_name:  "Tester",
       email:      "note_test@example.com",
       password:   "dottle-nouveau-pavilion-tights-furze",
-      )
+    )
 
     @project = @user.projects.create(
-        name: "Test Project",
-      )
+      name: "Test Project",
+    )
   end
   # # 和 before block 類似的整理方法
   # let(:user) { User.create!(
@@ -23,10 +23,10 @@ RSpec.describe Note, type: :model do
 
   it "is valid with a user, project, and message" do
     note = Note.new(
-        message: "This is a sample note",
-        user: @user,
-        project: @project,
-      )
+      message: "This is a sample note",
+      user: @user,
+      project: @project,
+    )
     expect(note).to be_valid
   end
 
@@ -65,5 +65,10 @@ RSpec.describe Note, type: :model do
         expect(Note.search("message")).to be_empty
       end
     end
+  end
+  it "generates associated data from a factory" do
+    note = FactoryBot.create(:note)
+    puts "This note's project is #{note.project.inspect}"
+    puts "This note's user is #{note.user.inspect }"
   end
 end

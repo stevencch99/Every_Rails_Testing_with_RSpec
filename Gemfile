@@ -20,6 +20,7 @@ group :development, :test do
   gem 'capybara', '~> 2.13.0'
   gem 'selenium-webdriver'
   gem 'factory_bot_rails', "~> 4.0"
+  gem 'hirb-unicode', '~> 0.0.5'
 end
 
 group :development do

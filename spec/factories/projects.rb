@@ -5,6 +5,10 @@ FactoryBot.define do
     due_on 1.week.from_now
     association :owner # 和 owner 產生關聯
 
+    trait :with_notes do
+      after(:create) { |project| create_list(:note, 5, project: project) }
+    end
+
     trait :due_yesterday do
       # Replace 'factory' with 'trait' -180717
       # factory :project_due_yesterday do

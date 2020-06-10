@@ -86,7 +86,7 @@ GEM
     faker (1.8.7)
       i18n (>= 0.7)
     ffi (1.11.1)
-    geocoder (1.4.9)
+    geocoder (1.6.1)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     hirb (0.7.3)
